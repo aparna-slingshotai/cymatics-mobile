@@ -2,11 +2,13 @@ import './PhoneUI.css'
 
 interface Props {
   isActive: boolean
+  isMuted: boolean
   onStart: () => void
   onStop: () => void
+  onToggleMute: () => void
 }
 
-export default function PhoneUI({ isActive, onStart, onStop }: Props) {
+export default function PhoneUI({ isActive, isMuted, onStart, onStop, onToggleMute }: Props) {
   return (
     <div className="phone-ui">
       <div className="phone-ui-top">
@@ -25,10 +27,22 @@ export default function PhoneUI({ isActive, onStart, onStop }: Props) {
       <div className="phone-ui-bottom">
         {isActive ? (
           <>
-            <button className="phone-btn phone-btn-speaker" aria-label="Speaker">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8.5v7a4.49 4.49 0 002.5-3.5z" />
-              </svg>
+            <button
+              className={`phone-btn phone-btn-speaker ${isMuted ? 'phone-btn-muted' : ''}`}
+              aria-label={isMuted ? 'Unmute' : 'Mute'}
+              onClick={onToggleMute}
+            >
+              {isMuted ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 9v6h4l5 5V4L7 9H3z" />
+                  <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8.5v7a4.49 4.49 0 002.5-3.5z" />
+                </svg>
+              )}
             </button>
             <button className="phone-btn-stop" onClick={onStop}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

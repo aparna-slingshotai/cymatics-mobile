@@ -77,6 +77,11 @@
 
 .phone-btn-speaker {
   background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.phone-btn-muted {
+  background: rgba(255, 60, 60, 0.5);
 }
 
 .phone-btn-start {

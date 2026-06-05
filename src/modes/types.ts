@@ -33,6 +33,7 @@ export interface CymaticsParams {
   inputSensitivity: number
   focalPoints: FocalPoint[]
   patternMode: PatternMode
+  muted: boolean
 }
 
 export interface ParameterizedMode extends VisualizerMode {
@@ -55,4 +56,5 @@ export const DEFAULT_PARAMS: CymaticsParams = {
   inputSensitivity: 0.7,
   focalPoints: DEFAULT_FOCAL_POINTS,
   patternMode: 'fixed',
+  muted: false,
 }

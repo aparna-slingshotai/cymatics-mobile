@@ -152,6 +152,33 @@ function updateAdjustable(audio: AudioData, _dt: number) {
   }
 }
 
+function updateGravity(dt: number) {
+  const gravity = 0.4
+  const bounceDamping = 0.3
+  const floor = h - 2
+
+  for (let i = 0; i < particleCount; i++) {
+    vys[i] += gravity
+    vxs[i] += (Math.random() - 0.5) * 0.15
+    vxs[i] *= 0.99
+    vys[i] *= 0.99
+
+    xs[i] += vxs[i] * dt * 60
+    ys[i] += vys[i] * dt * 60
+
+    if (ys[i] >= floor) {
+      ys[i] = floor
+      vys[i] *= -bounceDamping
+      vxs[i] *= 0.95
+      if (Math.abs(vys[i]) < 0.3) vys[i] = 0
+    }
+
+    if (xs[i] < 0) { xs[i] = 0; vxs[i] *= -0.5 }
+    if (xs[i] > w) { xs[i] = w; vxs[i] *= -0.5 }
+    if (ys[i] < 0) { ys[i] = 0; vys[i] *= -0.5 }
+  }
+}
+
 export const chladniCymatics: ParameterizedMode = {
   setParams(p: CymaticsParams) {
     const newCount = mapDensity(p.density)
@@ -177,7 +204,9 @@ export const chladniCymatics: ParameterizedMode = {
       needsReinit = false
     }
 
-    if (params.patternMode === 'fixed') {
+    if (params.muted) {
+      updateGravity(dt)
+    } else if (params.patternMode === 'fixed') {
       updateFixed(audio, dt)
     } else {
       updateAdjustable(audio, dt)

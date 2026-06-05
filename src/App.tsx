@@ -17,6 +17,10 @@ export default function App() {
     setSensitivity(value)
   }, [setSensitivity])
 
+  const handleToggleMute = useCallback(() => {
+    setParam('muted', !params.muted)
+  }, [params.muted, setParam])
+
   return (
     <div className="app-layout">
       <ControlPanel
@@ -37,8 +41,10 @@ export default function App() {
           />
           <PhoneUI
             isActive={isActive}
+            isMuted={params.muted}
             onStart={start}
             onStop={stop}
+            onToggleMute={handleToggleMute}
           />
         </PhoneMockup>
       </main>
