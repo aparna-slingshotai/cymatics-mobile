@@ -1,18 +1,20 @@
 .phone-ui {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 5;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 52px 20px 28px;
+  padding: env(safe-area-inset-top, 16px) 20px env(safe-area-inset-bottom, 28px);
+  padding-top: max(env(safe-area-inset-top, 16px), 16px);
 }
 
 .phone-ui-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding-top: 8px;
 }
 
 .phone-ui-bottom {
@@ -20,12 +22,13 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
+  padding-bottom: 12px;
 }
 
 .phone-btn {
   pointer-events: auto;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: none;
   background: rgba(0, 0, 0, 0.45);
@@ -39,17 +42,17 @@
   transition: background 0.2s;
 }
 
-.phone-btn:hover {
-  background: rgba(0, 0, 0, 0.6);
+.phone-btn:active {
+  background: rgba(0, 0, 0, 0.7);
 }
 
-.phone-btn-sparkle {
+.phone-btn-settings {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.phone-btn-sparkle:hover {
-  background: rgba(255, 255, 255, 0.25);
+.phone-btn-settings:active {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .phone-btn-stop {
@@ -57,21 +60,21 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 24px;
-  border-radius: 24px;
+  padding: 12px 28px;
+  border-radius: 28px;
   border: none;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: white;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s;
   letter-spacing: -0.01em;
 }
 
-.phone-btn-stop:hover {
+.phone-btn-stop:active {
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -89,20 +92,20 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 28px;
-  border-radius: 28px;
+  padding: 14px 32px;
+  border-radius: 32px;
   border: none;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: white;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s;
   letter-spacing: -0.01em;
 }
 
-.phone-btn-start:hover {
+.phone-btn-start:active {
   background: rgba(0, 0, 0, 0.7);
 }
