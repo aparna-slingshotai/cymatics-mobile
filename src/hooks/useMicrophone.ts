@@ -25,14 +25,16 @@ export function useMicrophone() {
   const start = useCallback(async () => {
     try {
       setError(null)
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      streamRef.current = stream
 
+      // Create AudioContext first (must happen in user gesture on iOS)
       if (!audioCtxRef.current) {
-        audioCtxRef.current = new AudioContext()
+        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)()
       }
       const ctx = audioCtxRef.current
       if (ctx.state === 'suspended') await ctx.resume()
+
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      streamRef.current = stream
 
       const analyser = ctx.createAnalyser()
       analyser.fftSize = 256

@@ -149,7 +149,14 @@ export default function Visualizer({ getAudioData, params, isActive, onFocalPoin
   return (
     <div
       ref={containerRef}
-      style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, touchAction: 'none' }}
+      style={{
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        inset: 0,
+        touchAction: params.patternMode === 'adjustable' ? 'none' : 'auto',
+        pointerEvents: params.patternMode === 'adjustable' ? 'auto' : 'none',
+      }}
     >
       <canvas ref={canvasRef} style={{ display: 'block', pointerEvents: 'none' }} />
     </div>
