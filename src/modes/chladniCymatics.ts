@@ -10,6 +10,7 @@ let h = 0
 let particleCount = 0
 let params: CymaticsParams = { ...DEFAULT_PARAMS }
 let needsReinit = false
+let wasMuted = false
 
 function mapDensity(d: number): number {
   return Math.round(500 + (d / 100) * 7500)
@@ -203,6 +204,16 @@ export const chladniCymatics: ParameterizedMode = {
       initParticles(mapDensity(params.density))
       needsReinit = false
     }
+
+    if (!params.muted && wasMuted) {
+      for (let i = 0; i < particleCount; i++) {
+        xs[i] = Math.random() * w
+        ys[i] = Math.random() * h
+        vxs[i] = (Math.random() - 0.5) * 2
+        vys[i] = -(Math.random() * 8 + 4)
+      }
+    }
+    wasMuted = params.muted
 
     if (params.muted) {
       updateGravity(dt)
